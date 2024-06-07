@@ -1,0 +1,34 @@
+.quiz-maker {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.quiz-maker .quiz-heading {
+  font-size: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.quiz-maker .quiz-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#categorySelect,
+#difficultySelect {
+  width: 320px;
+  height: 32px;
+}
+
+#createBtn {
+  background-color: white;
+  height: 32px;
+}
+
+#submitBtn {
+  background-color: gray;
+  color: white;
+  width: 400px;
+  height: 32px;
+}

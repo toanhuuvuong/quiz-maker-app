@@ -1,0 +1,17 @@
+.quiz-results {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.quiz-results .result-heading {
+  font-size: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+#redirectBtn {
+  background-color: gray;
+  color: white;
+  width: 400px;
+  height: 32px;
+}
