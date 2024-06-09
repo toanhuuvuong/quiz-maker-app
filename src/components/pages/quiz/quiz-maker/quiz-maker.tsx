@@ -1,35 +1,34 @@
+import { useEffect } from 'react';
+import { useGetTriviaCategories } from 'src/apis/get-trivia-categories';
 import BasicTemplate from 'src/components/templates/basic-template/basic-template';
 import { Page } from 'src/constants';
+import { quizReset } from 'src/redux/features/quiz/quiz-slice';
+import { useAppDispatch } from 'src/redux/hooks';
 import './quiz-maker.css';
+import { QuizContents, QuizFilters } from './sub-components';
 
 function QuizMaker() {
+  // Redux
+  const dispatch = useAppDispatch();
+
+  // React query hooks
+  const { data: categories, isLoading: categoriesLoading } =
+    useGetTriviaCategories();
+
+  // Effects
+  useEffect(() => {
+    dispatch(quizReset());
+  }, [dispatch]);
+
   return (
-    <BasicTemplate pageTitle={Page.QUIZ_MAKER.NAME}>
+    <BasicTemplate
+      pageTitle={Page.QUIZ_MAKER.NAME}
+      isLoading={categoriesLoading}
+    >
       <div className="quiz-maker">
         <h1 className="quiz-heading">QUIZ MAKER</h1>
-        <div className="quiz-filters">
-          <select id="categorySelect">
-            <option value={'categoryA'}>Category A</option>
-            <option value={'categoryB'}>Category B</option>
-            <option value={'categoryC'}>Category C</option>
-          </select>
-          <select id="difficultySelect">
-            <option value={'easy'}>Easy</option>
-            <option value={'medium'}>Medium</option>
-            <option value={'hard'}>Hard</option>
-          </select>
-          <button id="createBtn">Create</button>
-        </div>
-        <div className="quiz-contents">
-          <ul>
-            <li>Quiz 1</li>
-            <li>Quiz 2</li>
-            <li>Quiz 3</li>
-            <li>Quiz 4</li>
-            <li>Quiz 5</li>
-          </ul>
-          <button id="submitBtn">Submit</button>
-        </div>
+        <QuizFilters categories={categories} />
+        <QuizContents />
       </div>
     </BasicTemplate>
   );

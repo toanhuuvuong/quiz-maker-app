@@ -26,6 +26,13 @@
   height: 32px;
 }
 
+.quiz-maker .quiz-contents ul {
+  text-align: left;
+  max-width: 540px;
+  margin: 16px auto;
+  word-break: break-word;
+}
+
 #submitBtn {
   background-color: gray;
   color: white;

@@ -1,15 +1,21 @@
 import { PropsWithChildren } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { BasicSpinner } from 'src/components/atoms/spiner';
 
-interface Props {
+type Props = {
   pageTitle: string;
-}
+  isLoading?: boolean;
+};
 
-function BasicTemplate({ pageTitle, children }: PropsWithChildren<Props>) {
+function BasicTemplate({
+  pageTitle,
+  isLoading,
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <div className="basic-template">
       <Helmet title={pageTitle} />
-      {children}
+      {isLoading ? <BasicSpinner /> : children}
     </div>
   );
 }

@@ -1,16 +1,12 @@
 import { Color } from 'src/constants';
 
-interface AlertIconProps {
+type Props = {
   fill?: string;
   width?: number;
   height?: number;
-}
+};
 
-function AlertIcon({
-  fill = Color.BLACK,
-  width = 100,
-  height = 100,
-}: AlertIconProps) {
+function AlertIcon({ fill = Color.BLACK, width = 100, height = 100 }: Props) {
   return (
     <svg
       fill={fill}

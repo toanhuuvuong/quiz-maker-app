@@ -3,11 +3,11 @@ import { AlertIcon } from 'src/components/atoms/icons';
 import { Color } from 'src/constants';
 import './error-template.css';
 
-interface Props {
+type Props = {
   pageTitle: string;
   heading: string;
   message: string;
-}
+};
 
 function ErrorTemplate({ pageTitle, heading, message }: Props) {
   return (
