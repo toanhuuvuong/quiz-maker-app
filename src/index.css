@@ -1,5 +1,9 @@
 :root {
   --gray-color: #808080;
+  --green-color: #008000;
+  --red-color: #ff0000;
+  --yellow-color: #ffff00;
+  --white-color: #ffffff;
 }
 
 body {
@@ -19,4 +23,8 @@ code {
 ul,
 li {
   list-style: none;
+}
+
+button {
+  cursor: pointer;
 }

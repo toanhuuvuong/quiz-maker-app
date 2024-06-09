@@ -4,6 +4,7 @@ import BasicTemplate from 'src/components/templates/basic-template/basic-templat
 import { Page } from 'src/constants';
 import { quizReset } from 'src/redux/features/quiz/quiz-slice';
 import { useAppDispatch } from 'src/redux/hooks';
+import '../quiz.css';
 import './quiz-maker.css';
 import { QuizContents, QuizFilters } from './sub-components';
 
