@@ -9,6 +9,21 @@
   margin-bottom: 32px;
 }
 
+.quiz-results .result-contents {
+  max-width: 540px;
+  margin: 16px auto;
+}
+
+.quiz-results .result-contents ul {
+  text-align: left;
+  word-break: break-word;
+}
+
+.quiz-results .result-contents .question-answers {
+  display: flex;
+  gap: 8px;
+}
+
 #redirectBtn {
   background-color: gray;
   color: white;
