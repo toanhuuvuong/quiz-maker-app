@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import UrlNotFound from 'src/components/pages/error/url-not-found';
+import { UrlNotFound } from 'src/components/pages/error';
 import { Page } from 'src/constants';
 
 function BaseRouter({ children }: PropsWithChildren) {

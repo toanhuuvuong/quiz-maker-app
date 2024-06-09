@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react';
-import { TriviaCategory } from 'src/apis/get-trivia-categories';
+import { EncodeType, QuizType } from 'src/constants/enums';
 import { fetchQuizzes } from 'src/redux/features/quiz/quiz-slice';
 import { useAppDispatch } from 'src/redux/hooks';
+import { TriviaCategory } from 'src/types';
 
 enum DifficultyLevel {
   Easy = 'easy',
@@ -36,6 +37,9 @@ function QuizFilters({ categories }: Props) {
         fetchQuizzes({
           category: selectedCategory,
           difficulty: selectedDifficulty,
+          amount: 5,
+          type: QuizType.MULTIPLE,
+          encode: EncodeType.BASE64,
         })
       );
     }
@@ -66,10 +70,12 @@ function QuizFilters({ categories }: Props) {
           Select a difficulty
         </option>
         {Object.keys(DifficultyLevel).map((level) => {
-          const levelKey = level as keyof typeof DifficultyLevel;
           return (
-            <option key={levelKey} value={DifficultyLevel[levelKey]}>
-              {levelKey}
+            <option
+              key={level}
+              value={DifficultyLevel[level as keyof typeof DifficultyLevel]}
+            >
+              {level}
             </option>
           );
         })}

@@ -1,9 +1,10 @@
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { opendbAxios } from 'src/configs/opendb-axios';
+import { opendbAxios } from 'src/configs/axios';
 import { ExtractFnReturnType, QueryConfig } from 'src/configs/react-query';
-import { Page } from 'src/constants';
-import { Quiz } from 'src/redux/features/quiz/quiz-slice';
+import { ApiUrl, Page } from 'src/constants';
+import { EncodeType } from 'src/constants/enums';
+import { Quiz } from 'src/types';
 
 type GetQuizzesResponse = {
   response_code: number;
@@ -13,20 +14,20 @@ type GetQuizzesResponse = {
 export type GetQuizzesParams = {
   category: string;
   difficulty: string;
-  amount?: number;
-  type?: string;
-  encode?: string;
+  amount: number;
+  type: string;
+  encode?: EncodeType;
 };
 
 export async function getQuizzes({
   category,
   difficulty,
-  amount = 5,
-  type = 'multiple',
-  encode = 'base64',
+  amount,
+  type,
+  encode,
 }: GetQuizzesParams): Promise<Quiz[]> {
   return opendbAxios
-    .get('/api.php', {
+    .get(ApiUrl.OPENDB.GET_QUIZZES, {
       params: {
         amount,
         category,
@@ -56,14 +57,7 @@ export function useGetQuizzes({ params, config = {} }: QueryOptions) {
 
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: [
-      'quizzes',
-      params.category,
-      params.difficulty,
-      params.amount,
-      params.type,
-      params.encode,
-    ],
+    queryKey: ['quizzes', ...Object.values(params)],
     queryFn: () => getQuizzes(params),
     onError: (_) => {
       navigate(Page.SYSTEM_ERROR.PATH);

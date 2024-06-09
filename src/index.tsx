@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
-import './index.css';
 import { ErrorBoundary } from 'react-error-boundary';
-import SystemError from './components/pages/error/system-error';
+import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider } from 'react-query';
-import { queryClient } from './configs/react-query';
 import { Provider } from 'react-redux';
+import App from './App';
+import { SystemError } from './components/pages/error';
+import { queryClient } from './configs/react-query';
+import './index.css';
 import store from './redux/store';
 
 const root = ReactDOM.createRoot(
@@ -16,13 +16,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HelmetProvider>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
           <ErrorBoundary fallback={<SystemError />}>
             <App />
           </ErrorBoundary>
-        </QueryClientProvider>
-      </HelmetProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );

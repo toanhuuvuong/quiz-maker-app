@@ -1,0 +1,36 @@
+.quiz-heading {
+  font-size: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.quiz-contents {
+  max-width: 640px;
+  margin: 16px auto;
+}
+
+.quiz-contents .quiz-error {
+  color: red;
+}
+
+.quiz-contents .quiz-questions {
+  text-align: left;
+  word-break: break-word;
+}
+
+.quiz-contents .quiz-questions .quiz-answers {
+  display: flex;
+  gap: 8px;
+}
+
+.quiz-answer.normal {
+  background-color: var(--white-color);
+}
+
+.quiz-answer.correct {
+  background-color: var(--green-color);
+}
+
+.quiz-answer.wrong {
+  background-color: var(--red-color);
+}

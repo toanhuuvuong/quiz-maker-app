@@ -3,12 +3,6 @@
   margin: 0 auto;
 }
 
-.quiz-maker .quiz-heading {
-  font-size: 20px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-}
-
 .quiz-maker .quiz-filters {
   display: flex;
   align-items: center;
@@ -24,13 +18,6 @@
 #createBtn {
   background-color: white;
   height: 32px;
-}
-
-.quiz-maker .quiz-contents ul {
-  text-align: left;
-  max-width: 540px;
-  margin: 16px auto;
-  word-break: break-word;
 }
 
 #submitBtn {

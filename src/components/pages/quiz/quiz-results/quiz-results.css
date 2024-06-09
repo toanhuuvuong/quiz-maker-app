@@ -3,25 +3,21 @@
   margin: 0 auto;
 }
 
-.quiz-results .result-heading {
-  font-size: 20px;
-  margin-top: 32px;
-  margin-bottom: 32px;
+.quiz-results .quiz-score {
+  width: 200px;
+  margin: inherit;
 }
 
-.quiz-results .result-contents {
-  max-width: 540px;
-  margin: 16px auto;
+.quiz-score.weak {
+  background-color: var(--red-color);
 }
 
-.quiz-results .result-contents ul {
-  text-align: left;
-  word-break: break-word;
+.quiz-score.average {
+  background-color: var(--yellow-color);
 }
 
-.quiz-results .result-contents .question-answers {
-  display: flex;
-  gap: 8px;
+.quiz-score.good {
+  background-color: var(--green-color);
 }
 
 #redirectBtn {

@@ -1,20 +1,16 @@
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { opendbAxios } from 'src/configs/opendb-axios';
+import { opendbAxios } from 'src/configs/axios';
 import { ExtractFnReturnType, QueryConfig } from 'src/configs/react-query';
-import { Page } from 'src/constants';
-
-export type TriviaCategory = {
-  id: number;
-  name: string;
-};
+import { ApiUrl, Page } from 'src/constants';
+import { TriviaCategory } from 'src/types';
 
 type GetTriviaCategoriesResponse = {
   trivia_categories: TriviaCategory[];
 };
 
-export function getTriviaCategories(): Promise<TriviaCategory[]> {
-  return opendbAxios.get('/api_category.php').then((response) => {
+export async function getTriviaCategories(): Promise<TriviaCategory[]> {
+  return opendbAxios.get(ApiUrl.OPENDB.GET_CATEGORIES).then((response) => {
     const data = response.data as GetTriviaCategoriesResponse;
     return data.trivia_categories;
   });
@@ -28,8 +24,8 @@ type QueryOptions = {
 
 export function useGetTriviaCategories(queryOptions?: QueryOptions) {
   const navigate = useNavigate();
-
   const config = queryOptions?.config || {};
+
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     queryKey: ['triviaCategories'],

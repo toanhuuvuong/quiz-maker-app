@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BasicSpinner } from 'src/components/atoms/spiner';
-import { Color, Page } from 'src/constants';
+import { Page } from 'src/constants';
 import { StatusLoad } from 'src/constants/enums';
 import {
   quizAnswerSelected,
@@ -27,32 +28,48 @@ function QuizContents() {
     navigate(Page.QUIZ_RESULTS.PATH);
   }
 
+  const getAnswerBtnClassName = useCallback(
+    (answerBtnId: string, userAnswer?: string) => {
+      return `quiz-answer ${answerBtnId === userAnswer ? 'correct' : 'normal'}`;
+    },
+    []
+  );
+
   return (
     <div className="quiz-contents">
       {quizzesLoading === StatusLoad.LOADING ? (
         <BasicSpinner />
       ) : quizzesLoading === StatusLoad.FAILED ? (
-        <div>Error please re-create</div>
+        <div className="quiz-error">
+          Something went wrong, please try again!
+        </div>
       ) : (
-        <ul>
-          {quizzes.map((quizz) => {
+        <ul className="quiz-questions">
+          {quizzes.map((quiz) => {
             return (
-              <li key={quizz.question}>
-                {quizz.question} <br />
-                {Object.keys(quizz.answers).map((key) => {
-                  return (
-                    <button
-                      style={{
-                        backgroundColor:
-                          quizz.userAnswer === key ? Color.GREEN : Color.WHITE,
-                      }}
-                      key={key}
-                      onClick={() => handleAnswerBtnClick(quizz.question, key)}
-                    >
-                      {quizz.answers[key]}
-                    </button>
-                  );
-                })}
+              <li key={quiz.question}>
+                <p
+                  className="quiz-question"
+                  dangerouslySetInnerHTML={{ __html: quiz.question }}
+                />
+                <div className="quiz-answers">
+                  {Object.keys(quiz.answers).map((answerId) => {
+                    return (
+                      <button
+                        key={answerId}
+                        className={getAnswerBtnClassName(
+                          answerId,
+                          quiz.userAnswer
+                        )}
+                        onClick={() =>
+                          handleAnswerBtnClick(quiz.question, answerId)
+                        }
+                      >
+                        {quiz.answers[answerId]}
+                      </button>
+                    );
+                  })}
+                </div>
               </li>
             );
           })}

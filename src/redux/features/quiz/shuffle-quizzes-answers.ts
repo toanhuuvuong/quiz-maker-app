@@ -1,7 +1,11 @@
-import { Quiz } from './quiz-slice';
+import { Quiz } from 'src/types';
 
-function shuffleQuizzesAnswers(quizzes: { [key: string]: Quiz }) {
-  for (const quiz of Object.values(quizzes)) {
+function shuffleQuizzesAnswers(quizzes?: Quiz[]) {
+  if (!quizzes) {
+    return;
+  }
+
+  for (const quiz of quizzes) {
     // Shuffle array of answers
     const answers = [quiz.correct_answer, ...quiz.incorrect_answers];
     shuffle(answers);
@@ -18,7 +22,7 @@ function shuffleQuizzesAnswers(quizzes: { [key: string]: Quiz }) {
 function shuffle(array: string[]) {
   let currentIndex = array.length;
   while (currentIndex !== 0) {
-    let randomIndex = Math.floor(Math.random() * currentIndex);
+    const randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex],

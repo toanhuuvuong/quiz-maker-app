@@ -1,6 +1,5 @@
 import { Route } from 'react-router-dom';
-import SystemError from 'src/components/pages/error/system-error';
-import UrlNotFound from 'src/components/pages/error/url-not-found';
+import { SystemError, UrlNotFound } from 'src/components/pages/error';
 import { Page } from 'src/constants';
 
 const ErrorRouter = (

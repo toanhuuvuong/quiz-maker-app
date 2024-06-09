@@ -1,6 +1,5 @@
 import { Route } from 'react-router-dom';
-import QuizMaker from 'src/components/pages/quiz/quiz-maker/quiz-maker';
-import QuizResults from 'src/components/pages/quiz/quiz-results/quiz-results';
+import { QuizMaker, QuizResults } from 'src/components/pages/quiz';
 import { Page } from 'src/constants';
 
 const QuizRouter = (

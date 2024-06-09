@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BasicSpinner } from 'src/components/atoms/spiner';
+import './basic-template.css';
 
 type Props = {
   pageTitle: string;
