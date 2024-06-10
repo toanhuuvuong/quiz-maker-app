@@ -1,0 +1,11 @@
+.quiz-answer.normal {
+  background-color: var(--white-color);
+}
+
+.quiz-answer.correct {
+  background-color: var(--green-color);
+}
+
+.quiz-answer.wrong {
+  background-color: var(--red-color);
+}

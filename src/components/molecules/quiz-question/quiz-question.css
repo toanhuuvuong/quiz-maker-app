@@ -1,0 +1,8 @@
+.quiz-question .quiz-question-content {
+  font-weight: 500;
+}
+
+.quiz-question .quiz-answers {
+  display: flex;
+  gap: 8px;
+}

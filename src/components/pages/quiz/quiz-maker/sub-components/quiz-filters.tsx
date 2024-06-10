@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { EncodeType, QuizType } from 'src/constants/enums';
-import { fetchQuizzes } from 'src/redux/features/quiz/quiz-slice';
+import { fetchQuizzes, quizReset } from 'src/redux/features/quiz/quiz-slice';
 import { useAppDispatch } from 'src/redux/hooks';
 import { TriviaCategory } from 'src/types';
 
@@ -33,6 +33,7 @@ function QuizFilters({ categories }: Props) {
 
   function handleCreateBtnClick() {
     if (selectedCategory && selectedDifficulty) {
+      dispatch(quizReset());
       dispatch(
         fetchQuizzes({
           category: selectedCategory,
