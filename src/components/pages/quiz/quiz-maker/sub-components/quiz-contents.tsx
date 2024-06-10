@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AnswerType } from 'src/components/atoms/quiz-answer/quiz-answer';
 import { BasicSpinner } from 'src/components/atoms/spiner';
+import QuizQuestion from 'src/components/molecules/quiz-question/quiz-question';
 import { Page } from 'src/constants';
 import { StatusLoad } from 'src/constants/enums';
 import {
@@ -8,6 +10,7 @@ import {
   selectQuizzes,
 } from 'src/redux/features/quiz/quiz-slice';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { Quiz } from 'src/types';
 
 function QuizContents() {
   // Router
@@ -20,20 +23,22 @@ function QuizContents() {
   const allAnswered = useAppSelector((state) => state.quiz.allAnswered);
 
   // Event handlers
-  function handleAnswerBtnClick(questionId: string, answerId: string) {
-    dispatch(quizAnswerSelected(questionId, answerId));
-  }
+  const handleAnswerBtnClick = useCallback(
+    (answerId: string, quiz: Quiz) => {
+      dispatch(quizAnswerSelected(quiz.question, answerId));
+    },
+    [dispatch]
+  );
 
   function handleSubmitBtnClick() {
     navigate(Page.QUIZ_RESULTS.PATH);
   }
 
-  const getAnswerBtnClassName = useCallback(
-    (answerBtnId: string, userAnswer?: string) => {
-      return `quiz-answer ${answerBtnId === userAnswer ? 'correct' : 'normal'}`;
-    },
-    []
-  );
+  const getAnswerType = useCallback((answerId: string, quiz: Quiz) => {
+    return answerId === quiz.userAnswer
+      ? AnswerType.CORRECT
+      : AnswerType.NORMAL;
+  }, []);
 
   return (
     <div className="quiz-contents">
@@ -44,41 +49,23 @@ function QuizContents() {
           Something went wrong, please try again!
         </div>
       ) : (
-        <ul className="quiz-questions">
-          {quizzes.map((quiz) => {
-            return (
-              <li key={quiz.question}>
-                <p
-                  className="quiz-question"
-                  dangerouslySetInnerHTML={{ __html: quiz.question }}
-                />
-                <div className="quiz-answers">
-                  {Object.keys(quiz.answers).map((answerId) => {
-                    return (
-                      <button
-                        key={answerId}
-                        className={getAnswerBtnClassName(
-                          answerId,
-                          quiz.userAnswer
-                        )}
-                        onClick={() =>
-                          handleAnswerBtnClick(quiz.question, answerId)
-                        }
-                      >
-                        {quiz.answers[answerId]}
-                      </button>
-                    );
-                  })}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-      {allAnswered && (
-        <button id="submitBtn" onClick={handleSubmitBtnClick}>
-          Submit
-        </button>
+        <>
+          <ul className="quiz-questions">
+            {quizzes.map((quiz) => (
+              <QuizQuestion
+                key={quiz.question}
+                quiz={quiz}
+                getAnswerType={getAnswerType}
+                handleAnswerBtnClick={handleAnswerBtnClick}
+              />
+            ))}
+          </ul>
+          {allAnswered && (
+            <button id="submitBtn" onClick={handleSubmitBtnClick}>
+              Submit
+            </button>
+          )}
+        </>
       )}
     </div>
   );
